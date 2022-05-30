@@ -17,10 +17,11 @@ buildscript {
 rootProject.allprojects {
     repositories {
         maven {
-            url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"
-        }
+            url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"}
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
+
     }
 }
 
@@ -28,7 +29,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -46,9 +47,15 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'androidx.core:core-ktx:1.6.0'
+    }
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Jitsi Meet from https://github.com/jitsi/jitsi-maven-repository/tree/master/releases/org/jitsi/react/jitsi-meet-sdk
-    implementation ('org.jitsi.react:jitsi-meet-sdk:3.3.0') { transitive = true }
+    implementation ('org.jitsi.react:jitsi-meet-sdk:5.1.0') { transitive = true }
 }
