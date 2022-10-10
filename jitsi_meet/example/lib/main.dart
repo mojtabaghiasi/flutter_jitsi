@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:jitsi_meet/jitsi_meet.dart';
@@ -26,7 +24,7 @@ class _MeetingState extends State<Meeting> {
   final nameText = TextEditingController(text: "Plugin Test User");
   final emailText = TextEditingController(text: "fake@email.com");
   final iosAppBarRGBAColor =
-      TextEditingController(text: "#0080FF80"); //transparent blue
+  TextEditingController(text: "#0080FF80"); //transparent blue
   bool? isAudioOnly = true;
   bool? isAudioMuted = true;
   bool? isVideoMuted = true;
@@ -53,7 +51,7 @@ class _MeetingState extends State<Meeting> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Edibo jitsi'),
         ),
         body: Container(
           padding: const EdgeInsets.symmetric(
@@ -61,32 +59,32 @@ class _MeetingState extends State<Meeting> {
           ),
           child: kIsWeb
               ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: width * 0.30,
-                      child: meetConfig(),
-                    ),
-                    Container(
-                        width: width * 0.60,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                              color: Colors.white54,
-                              child: SizedBox(
-                                width: width * 0.60 * 0.70,
-                                height: width * 0.60 * 0.70,
-                                child: JitsiMeetConferencing(
-                                  extraJS: [
-                                    // extraJs setup example
-                                    '<script>function echo(){console.log("echo!!!")};</script>',
-                                    '<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>'
-                                  ],
-                                ),
-                              )),
-                        ))
-                  ],
-                )
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: width * 0.30,
+                child: meetConfig(),
+              ),
+              Container(
+                  width: width * 0.60,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                        color: Colors.white54,
+                        child: SizedBox(
+                          width: width * 0.60 * 0.70,
+                          height: width * 0.60 * 0.70,
+                          child: JitsiMeetConferencing(
+                            extraJS: [
+                              // extraJs setup example
+                              '<script>function echo(){console.log("echo!!!")};</script>',
+                              '<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>'
+                            ],
+                          ),
+                        )),
+                  ))
+            ],
+          )
               : meetConfig(),
         ),
       ),
@@ -198,7 +196,7 @@ class _MeetingState extends State<Meeting> {
               ),
               style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateColor.resolveWith((states) => Colors.blue)),
+                  MaterialStateColor.resolveWith((states) => Colors.blue)),
             ),
           ),
           SizedBox(
@@ -241,6 +239,7 @@ class _MeetingState extends State<Meeting> {
       if (Platform.isAndroid) {
         // Disable ConnectionService usage on Android to avoid issues (see README)
         featureFlags[FeatureFlagEnum.CALL_INTEGRATION_ENABLED] = false;
+        featureFlags[FeatureFlagEnum.LIVE_STREAMING_ENABLED] = true;
       } else if (Platform.isIOS) {
         // Disable PIP on iOS as it looks weird
         featureFlags[FeatureFlagEnum.PIP_ENABLED] = false;
